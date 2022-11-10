@@ -16,21 +16,21 @@ scenarios('../features/web.feature')
 
 #Fixtures
 
-@pytest.fixture(scope="class")
-def browser(request):
-    #For this example, we will use Firefox
-    #You can change this fixture to use other browsers, too.
-    # A better practice would be to get browser choice from a config file.
-    driver = webdriver.Chrome()
-    driver.implicitly_wait(10)
-    yield driver
-    driver.quit()
+# @pytest.fixture(scope="class")
+# def browser(request):
+#     #For this example, we will use Firefox
+#     #You can change this fixture to use other browsers, too.
+#     # A better practice would be to get browser choice from a config file.
+#     driver = webdriver.Chrome()
+#     driver.implicitly_wait(10)
+#     yield driver
+#     driver.quit()
 
 # Given Steps
-
-@given('the DuckDuckGo home page is displayed')
-def ddg_home(browser):
-    browser.get(DUCKDUCKGO_HOME)
+#
+# @given('the DuckDuckGo home page is displayed')
+# def ddg_home(browser):
+#     browser.get(DUCKDUCKGO_HOME)
 
 #When Steps
 @when(parsers.parse('the user searches for "{text}"'))
@@ -58,4 +58,4 @@ def search_results(browser, phrase):
     assert len(links_div.find_elements(By.XPATH, "//div")) > 0
     #Check search phrase
     search_input = browser.find_element(By.NAME,"q")
-    assert search_input.get_attribute('value') == phrase
+    assert not search_input.get_attribute('value') == phrase #not is deliberately added to create an error
